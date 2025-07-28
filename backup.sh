@@ -76,4 +76,10 @@ log_backup() {
   tail -n 6 "$LOG_FILE"
   echo ""
 }
+cleanup_old_backups() {
+  DAYS_TO_KEEP=7
+  echo "Removing backup files older than $DAYS_TO_KEEP days from $BACKUP_DEST ..."
+  find "$BACKUP_DEST" -type f -name "backup_*.tar.gz" -mtime +$DAYS_TO_KEEP -exec rm -v {} \;
+  echo ""
+}
 exit 0
