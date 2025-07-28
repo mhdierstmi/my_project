@@ -60,5 +60,20 @@ create_backup_archive() {
   fi
   echo ""
 }
-
+log_backup() {
+  LOG_FILE="backup.log"
+  START_TIME=$1
+  END_TIME=$2
+  ARCHIVE_PATH=$3
+  DURATION=$((END_TIME - START_TIME))
+  FILE_SIZE=$(du -h "$ARCHIVE_PATH" | cut -f1)
+  echo "Backup completed at $(date)" >> "$LOG_FILE"
+  echo "Backup file: $ARCHIVE_PATH" >> "$LOG_FILE"
+  echo "File size: $FILE_SIZE" >> "$LOG_FILE"
+  echo "Duration: ${DURATION}s" >> "$LOG_FILE"
+  echo "---------------------------------" >> "$LOG_FILE"
+  echo "Backup log updated:"
+  tail -n 6 "$LOG_FILE"
+  echo ""
+}
 exit 0
