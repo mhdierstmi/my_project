@@ -17,4 +17,14 @@ get_backup_config() {
   cat backup.conf
   echo ""
 }
+get_backup_destination() {
+  BACKUP_DEST=$1
+  if [ -z "$BACKUP_DEST" ]; then
+    echo "Error: Backup destination path not specified as argument."
+    exit 1
+  fi
+  mkdir -p "$BACKUP_DEST"
+  echo "Backup destination set to: $BACKUP_DEST"
+  echo ""
+}
 exit 0
