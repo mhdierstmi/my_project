@@ -82,4 +82,12 @@ cleanup_old_backups() {
   find "$BACKUP_DEST" -type f -name "backup_*.tar.gz" -mtime +$DAYS_TO_KEEP -exec rm -v {} \;
   echo ""
 }
+get_backup_config
+get_backup_destination "$1"
+START_TIME=$(date +%s)
+list_files_to_backup
+create_backup_archive
+END_TIME=$(date +%s)
+log_backup $START_TIME $END_TIME "$ARCHIVE_PATH"
+cleanup_old_backups
 exit 0
