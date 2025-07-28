@@ -42,4 +42,12 @@ list_files_to_backup() {
   cat "$TMP_FILE"
   echo ""
 }
+create_backup_archive() {
+  TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+  ARCHIVE_NAME="backup_$TIMESTAMP.tar.gz"
+  ARCHIVE_PATH="$BACKUP_DEST/$ARCHIVE_NAME"
+  if [ ! -s file_list.txt ]; then
+    echo "No files to backup. Exiting."
+    exit 1
+  fi
 exit 0
