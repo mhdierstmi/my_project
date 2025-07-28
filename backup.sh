@@ -90,4 +90,5 @@ create_backup_archive
 END_TIME=$(date +%s)
 log_backup $START_TIME $END_TIME "$ARCHIVE_PATH"
 cleanup_old_backups
+echo "Backup completed successfully"
 exit 0
