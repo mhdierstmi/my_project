@@ -50,4 +50,15 @@ create_backup_archive() {
     echo "No files to backup. Exiting."
     exit 1
   fi
+  echo "Creating backup archive $ARCHIVE_PATH ..."
+  tar -czf "$ARCHIVE_PATH" -T file_list.txt
+  if [ $? -eq 0 ]; then
+    echo "Backup archive created successfully."
+  else
+    echo "Error creating backup archive!"
+    exit 1
+  fi
+  echo ""
+}
+
 exit 0
