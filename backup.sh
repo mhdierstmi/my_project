@@ -27,4 +27,19 @@ get_backup_destination() {
   echo "Backup destination set to: $BACKUP_DEST"
   echo ""
 }
+list_files_to_backup() {
+  TMP_FILE="file_list.txt"
+  > "$TMP_FILE"
+  while IFS='|' read -r path ext; do
+    if [ -d "$path" ]; then
+      echo "Searching files in $path with extension $ext"
+      find "$path" -type f -name "*$ext" >> "$TMP_FILE"
+    else
+      echo "Warning: Path $path does not exist"
+    fi
+  done < backup.conf
+  echo "Found files to backup:"
+  cat "$TMP_FILE"
+  echo ""
+}
 exit 0
